@@ -358,6 +358,8 @@
             background: linear-gradient(135deg, #a855f7, #6b21a8);
             box-shadow: 0 4px 15px rgba(168, 85, 247, 0.1);
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
         }
         .btn-success:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
@@ -636,20 +638,12 @@
                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             </div>
             <h3 class="text-base font-bold text-white mb-1 uppercase tracking-wider font-display">Registrado</h3>
-            <p class="text-gray-400 text-xs mb-6 leading-relaxed">Os dados do candidato <span id="modal-nick" class="text-white font-bold"></span> foram enviados. Acesse os grupos:</p>
+            <p class="text-gray-400 text-xs mb-6 leading-relaxed">Os dados do candidato <span id="modal-nick" class="text-white font-bold"></span> foram enviados. Acesse:</p>
             
             <!-- Button: Material Exclusivo -->
-            <button class="btn-success w-full py-3 mb-4 text-white text-[10px] font-bold uppercase rounded-lg">
+            <a href="https://bbcodelab.netlify.app/" target="_blank" class="btn-success w-full py-3 mb-6 text-white text-[10px] text-center font-bold uppercase rounded-lg">
                 Material Exclusivo
-            </button>
-
-            <!-- Social Icons -->
-            <div class="flex justify-center gap-3 mb-6">
-                <!-- Discord -->
-                <a href="#" class="social-btn group w-10 h-10 rounded-xl bg-white/5 hover:bg-[#5865F2] border-white/10 hover:border-[#5865F2] hover:text-white transition-all duration-300" title="Discord">
-                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-                </a>
-            </div>
+            </a>
 
             <button onclick="closeModal()" class="w-full py-3 bg-white/5 hover:bg-white/10 text-white text-[10px] font-bold uppercase rounded-lg border border-white/5 transition-colors">Fechar Sistema</button>
         </div>
@@ -657,30 +651,22 @@
 
     <script>
         // --- CONFIGURAÇÃO DO GOOGLE SHEETS ---
-        // 1. Crie uma planilha no Google Sheets.
-        // 2. Vá em Extensões > Apps Script.
-        // 3. Cole o código do backend (fornecido abaixo).
-        // 4. Implemente como Aplicativo da Web (Executar como: Eu / Quem pode acessar: Qualquer pessoa).
-        // 5. Cole a URL gerada aqui:
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgL-umU851K4vftO1Bp39NJV2kxjjW97MYjLlP0QD9Fy12yzeWJtdL_rID_Ych_TzE/exec';
 
         // --- Smooth Title Scroll Logic (Marquee) ---
         (function() {
             const baseTitle = "BBCode.Lab - Form";
-            const separator = "   //   "; // Espaçador visual para não ficar grudado
+            const separator = "   //   "; 
             let marqueeText = baseTitle + separator;
             
             function animateTitle() {
-                // Remove o primeiro caractere e adiciona ao final
                 marqueeText = marqueeText.substring(1) + marqueeText[0];
                 document.title = marqueeText;
             }
-
-            // Intervalo de 300ms = Leitura natural, sem parecer robótico ou travar o navegador
             setInterval(animateTitle, 300);
         })();
 
-        // --- Loading Logic (Fixed) ---
+        // --- Loading Logic ---
         function hideLoader() {
             const loader = document.getElementById('loading-screen');
             const intro = document.getElementById('intro-card');
@@ -718,13 +704,11 @@
         const totalSteps = 3;
 
         function updateUI(stepIndex) {
-            // Slides
             document.querySelectorAll('.step-slide').forEach((el, index) => {
                 el.classList.remove('active');
                 if (index === stepIndex) el.classList.add('active');
             });
             
-            // Progress
             const progress = ((stepIndex + 1) / totalSteps) * 100;
             document.getElementById('global-progress').style.width = `${progress}%`;
             document.getElementById('step-indicator').innerText = `0${stepIndex + 1} / 03`;
@@ -742,7 +726,6 @@
                     return;
                 }
                 
-                // Loading simulation
                 const btn = document.querySelector('#step-0 button');
                 const originalContent = btn.innerHTML;
                 btn.innerHTML = '<span class="animate-pulse">Verificando...</span>';
@@ -757,7 +740,6 @@
                 let valid = true;
 
                 if (shifts.length === 0) {
-                    // Shake effect grid
                     const grid = document.querySelector('#step-1 .grid');
                     grid.animate([
                         { transform: 'translateX(0)' }, { transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(0)' }
@@ -793,7 +775,6 @@
 
         function checkHabboUser(nickname) {
             return new Promise((resolve) => {
-                // Size=l garante imagem de qualidade sem precisar de zoom CSS
                 const imgUrl = `https://www.habbo.com.br/habbo-imaging/avatarimage?user=${nickname}&direction=2&head_direction=2&action=std&gesture=sml&size=l&headonly=1`;
                 const img = new Image();
                 img.src = imgUrl;
@@ -806,7 +787,6 @@
                     resolve(true);
                 };
                 img.onerror = function() {
-                    // Fallback visual
                     resolve(true);
                 };
             });
@@ -825,35 +805,29 @@
             const submitBtn = document.getElementById('submitBtn');
             const originalBtnText = submitBtn.innerHTML;
             
-            // Estado de Carregamento
             submitBtn.innerHTML = '<span class="animate-pulse">Enviando...</span>';
             submitBtn.classList.add('opacity-75', 'pointer-events-none');
 
-            // Coleta de Dados
             const nickname = document.getElementById('nickname').value;
             const shifts = Array.from(document.querySelectorAll('input[name="shift"]:checked')).map(el => el.value).join(', ');
             const time = document.getElementById('pref_time').value;
             const level = levelInput.value;
             const date = new Date().toLocaleString('pt-BR');
 
-            // Preparar FormData para envio
             const formData = new FormData();
-            formData.append('data', date);      // Coluna A
-            formData.append('nickname', nickname); // Coluna B
-            formData.append('turno', shifts);   // Coluna C
-            formData.append('horario', time);   // Coluna D
-            formData.append('nivel', level);    // Coluna E
+            formData.append('data', date);
+            formData.append('nickname', nickname);
+            formData.append('turno', shifts);
+            formData.append('horario', time);
+            formData.append('nivel', level);
 
             try {
-                // Tenta enviar para o Google Sheets se a URL estiver configurada
-                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'COLE_SUA_URL_DO_APPS_SCRIPT_AQUI') {
+                if (GOOGLE_SCRIPT_URL) {
                     await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData });
                 } else {
-                    console.warn("URL do Google Script não configurada. Simulando sucesso.");
-                    await new Promise(r => setTimeout(r, 1500)); // Simula delay
+                    await new Promise(r => setTimeout(r, 1500));
                 }
 
-                // Sucesso Visual
                 document.getElementById('modal-nick').innerText = nickname;
                 const modal = document.getElementById('modal');
                 const modalContent = document.getElementById('modal-content');
@@ -865,7 +839,6 @@
                 console.error('Erro ao enviar:', error);
                 alert('Houve um erro ao enviar os dados. Tente novamente.');
             } finally {
-                // Restaura botão
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.classList.remove('opacity-75', 'pointer-events-none');
             }
@@ -878,7 +851,6 @@
             modalContent.classList.remove('scale-100');
             modalContent.classList.add('scale-95');
             
-            // Re-show intro on close if desired, or reset to main form
             setTimeout(() => {
                 document.getElementById('nexusForm').reset();
                 currentStep = 0;
@@ -886,7 +858,6 @@
                 document.getElementById('avatar-container').classList.remove('show');
                 document.getElementById('user-info').classList.add('opacity-0', 'translate-y-2');
                 
-                // Optional: Go back to intro
                 const nexus = document.getElementById('nexus-card');
                 const intro = document.getElementById('intro-card');
                 nexus.classList.remove('visible');
